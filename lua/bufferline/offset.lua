@@ -28,7 +28,7 @@ local supported_win_types = {
 ---@param is_left boolean?
 ---@return string
 local function get_section_text(size, highlight, offset, is_left)
-  local text = offset.text or offset.raw
+  local text = offset.text or (type(offset.raw) == "function" and offset.raw() or offset.raw)
 
   if type(text) == "function" then text = text() end
   text = text or padding:rep(size - 2)
